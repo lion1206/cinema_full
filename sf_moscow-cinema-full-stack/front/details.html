@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Фильм</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/details.css">
+</head>
+<body>
+    <header>
+        <div class="burger" id="burgerMenu">
+            <span></span><span></span><span></span>
+        </div>
+        <div class="cinema">
+            <a href="index.html" style="text-decoration: none; color: inherit;">
+                <p class="ms">moscow</p>
+                <p class="cn">cinema</p>
+            </a>
+        </div>
+        <div class="desktop-nav" id="desktopNav">
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li id="desktopLkNavLink"><a href="lk.html">Личный кабинет</a></li>
+                <li><a id="desktopAuthLink" href="#">ВХОД</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <nav id="mainNav" class="main-nav">
+        <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li id="mobileLkNavLink"><a href="lk.html">Личный кабинет</a></li>
+            <li><a id="mobileAuthLink" href="#">ВХОД</a></li>
+        </ul>
+    </nav>
+    <div class="left-line"></div>
+
+    <main class="details-page-content">
+        <div id="film">
+            <!-- Film details will be loaded here by details.js -->
+        </div>
+
+        <!-- Seat Selection Section - Directly on the page, initially hidden -->
+        <section id="seatSelectionSection" style="display: none;">
+            <h2 class="section-title">Выберите места</h2>
+
+            <!-- screen -->
+            <div class="screen"></div>
+
+            <!-- seat grid -->
+            <div id="seat-hall" class="hall" aria-label="Схема зала"></div>
+            <!-- row labels -->
+            <div id="seat-rowLabels" class="row-labels" aria-hidden="true"></div>
+
+            <!-- summary and payment -->
+            <div class="summary">
+                <div class="total-line">
+                    <span id="selectedCount">0</span> мест × <span id="price">440</span> ₽ =
+                    <strong id="total">0 ₽</strong>
+                </div>
+                <button id="payBtn" class="btn-buy" disabled>Оплатить</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Login/Register Modals (site-wide) -->
+    <div id="loginModal" class="modal" aria-hidden="true">
+        <div class="modal-backdrop"></div>
+        <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+            <button class="modal-close" aria-label="Закрыть">×</button>
+            <h2 id="loginTitle" class="modal-title">Вход</h2>
+            <div class="login-form">
+                <div class="log">
+                    <p>Логин</p>
+                    <input type="text" name="username" id="loginUsername" class="l">
+                </div>
+                <div class="pasword">
+                    <p>Пароль</p>
+                    <input type="password" name="password" id="loginPassword">
+                </div>
+                <p id="loginError" style="color: red; text-align: center;"></p>
+                <button id="loginSubmitBtn" class="btn-glow" type="button" style="margin-left:0; margin-top:20px; width:100%;">Войти</button>
+                <div class="reg" style="margin-top:20px;">
+                    <p> У вас нет аккаунта?</p>
+                    <a href="#" id="openRegisterModal">Регистрация</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="registerModal" class="modal" aria-hidden="true">
+        <div class="modal-backdrop"></div>
+        <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="registerTitle">
+            <button class="modal-close" aria-label="Закрыть">×</button>
+            <h2 id="registerTitle" class="modal-title">Регистрация</h2>
+            <div class="register-form">
+                <p class="text"> Регистрация</p>
+                <div class="log">
+                    <p>Имя пользователя</p>
+                    <input type="text" name="username" id="registerUsername" class="l">
+                </div>
+                <div class="pasword">
+                    <p>Почта</p>
+                    <input type="email" name="email" id="registerEmail">
+                </div>
+                <div class="pasword">
+                    <p>Пароль</p>
+                    <input type="password" name="password" id="registerPassword">
+                </div>
+                <div class="pasword">
+                    <p>Подтвердите пароль</p>
+                    <input type="password" name="confirmPassword" id="registerConfirmPassword">
+                </div>
+                <p id="registerError" style="color: red; text-align: center;"></p>
+                <button id="registerSubmitBtn" class="btn-glow" type="button" style="margin-left:0; margin-top:20px; width:100%;">Зарегистрироваться</button>
+                <div class="reg" style="margin-top:20px;">
+                    <p> У вас уже есть аккаунт?</p>
+                    <a href="#" id="openLoginModal">Вход</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js" defer></script>
+    <script src="details.js" defer></script>
+</body>
+</html>
