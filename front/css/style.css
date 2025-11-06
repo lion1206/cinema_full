@@ -1,0 +1,1097 @@
+*{ box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #000;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  padding-top: 80px;  /* Compensate for fixed header */
+  min-height: 100vh; /* Ensure body takes full viewport height */
+}
+
+.ms, .cn {
+    font-size: 48px; /* Consistent size for desktop */
+    font-weight: 700;
+}
+
+
+/* Header adjustments for burger menu interaction */
+header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background:#222121;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  padding:0 16px;
+  z-index:1000;
+}
+
+header *{ margin:0; padding:0; }
+
+.burger{
+  width:35px; height:20px;
+  display:flex; flex-direction:column;
+  justify-content:space-between;
+  cursor:pointer;
+  z-index: 1001;
+}
+.burger span{ width:100%; height:4px; background:#fff; border-radius:2px; }
+
+.cinema{
+  position:absolute; left:50%; top:50%;
+  transform:translate(-50%, -50%);
+  display:flex; gap:6px; white-space:nowrap; line-height:1;
+}
+
+/* Base button styles */
+.btn-glow {
+  position:relative;
+  border:none;
+  border-radius:20px;
+  padding:12px 32px;
+  font-size:20px;
+  font-weight:500;
+  color:#fff; background:#FF0000; cursor:pointer; outline:none;
+  transition:transform .15s ease, box-shadow .3s ease; /* Added box-shadow to transition */
+
+  display: block;
+  width: max-content;
+  margin-left: 70px; /* Default for non-modal buttons */
+}
+.btn-glow::before{
+  content:""; position:absolute; inset:0; border-radius:20px;
+  background:#FF0000; filter:blur(35px); z-index:-1; transform:translateY(10px);
+  transition:transform .15s ease, filter .3s ease; /* Added transition for glow */
+}
+.btn-glow:hover{
+    transform:translateY(-2px); /* Slightly more pronounced lift on hover */
+    box-shadow: 0 10px 25px rgba(255, 0, 0, 0.4); /* Subtle shadow on hover */
+}
+.btn-glow:active{ transform:translateY(0); }
+
+
+.login-form .log p, .login-form .pasword p,
+.register-form .log p, .register-form .pasword p {
+  margin: 0;
+  font-size: 18px;
+  color: #b7b7b7;
+  margin-bottom: 5px; /* Added slight space between label and input */
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"],
+.register-form input[type="text"],
+.register-form input[type="password"],
+.register-form input[type="email"] {
+    width: 100%;
+    padding: 12px 15px; /* Increased horizontal padding */
+    background: #121212;
+    color: #fff;
+    border: 1px solid #2a2a2a;
+    border-radius: 10px;
+    outline: none;
+    box-sizing: border-box; /* Crucial for consistent width */
+    font-size: 16px; /* Ensure readability */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.login-form input:focus,
+.register-form input:focus {
+    border-color: #FF0000; /* Red border on focus */
+    box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.3); /* Soft red glow on focus */
+}
+
+/* Modal specific button adjustments */
+.modal-dialog .btn-glow {
+    width: 100%;
+    margin-left: 0; /* Override default margin */
+    margin-top: 25px; /* More space above the button in modal */
+    padding: 15px 30px; /* Slightly larger padding for prominence */
+    font-size: 18px;
+}
+.modal-dialog .btn-glow::before {
+    filter: blur(25px); /* Slightly less aggressive blur for modal buttons */
+}
+
+
+.ms{ color:#fff; font-size:48px; font-weight:700; }
+.cn{ color:#FF0000;  font-size:48px; font-weight:700; }
+
+.btn{
+  margin-left:auto; margin-right:8px;
+  padding:15px 54px;
+  color:#fff; background:#000; border:none; border-radius:20px;
+  cursor:pointer; white-space:nowrap; flex:0 0 auto; max-width:40vw;
+}
+
+/* Вертикальная полоса слева */
+.left-line{
+  position:fixed; left:0; top:0;
+  width:80px; height:100vh; background:#222121;
+}
+
+/* HERO */
+:root{
+  /* раньше: clamp(360px, 50vw, 880px) */
+  --art-w: calc(clamp(360px, 50vw, 880px) + 120px); /* +120px к ширине */
+}
+
+.hero{
+  position: relative;
+  width: 100%;
+  padding: 120px 0 80px 120px;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.hero-content{
+  position: relative;
+  z-index: 2;          /* текст поверх арта */
+  max-width: 600px;
+  padding-right: 16px;
+}
+
+/* единый контейнер арта справа */
+.hero-art{
+  position: absolute;
+  inset: 0 0 0 auto;   /* прижали к правому краю, растянули по высоте .hero */
+  width: var(--art-w);
+  height: 100%;
+  z-index: 1;          /* ниже текста */
+  background-size: 100% 100%;
+  -webkit-mask-size: 100% 100%;
+          mask-size: 100% 100%;
+  /* ПОДЛОЖКА как фон */
+  color: #FF0000;
+  background: url("../photo/group-20.png") right center / contain no-repeat;
+
+  /* МАСКА той же формой: дети не вылезут за границы подложки */
+  -webkit-mask: url("../photo/group-20.png") right center / contain no-repeat;
+          mask: url("../photo/group-20.png") right center / contain no-repeat;
+}
+:root{
+  --bm-scale: 0.9;   /* 1 = оригинальный размер, 0.5 = половина, 1.5 = больше */
+  --bm-x: 30px;     /* сдвиг по горизонтали: + вправо, - влево */
+  --bm-y: 50px;     /* сдвиг по вертикали: + вниз, - вверх */
+}
+
+/* сам Бэтмен внутри контейнера */
+.hero-photo{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom center;          /* берём центр как точку отсчёта */
+   filter: drop-shadow(0 24px 48px rgba(0,0,0,.55));
+  /* теперь всё управление через scale + translate */
+  transform: translate(var(--bm-x), var(--bm-y)) scale(var(--bm-scale));
+  transform-origin: center bottom;  /* масштаб и сдвиг относительно центра */
+  
+  transition: transform .2s ease;   /* плавная подгонка */
+  pointer-events: none;
+}
+
+
+
+
+.title{
+  margin:0 0 16px 0;
+  font-size:96px; font-weight:500; line-height:1;
+  color:#fff;                       /* явно, чтобы не зависеть от наследования */
+}
+
+.rating{
+  margin:0 0 40px 0;
+  font-size:20px; font-weight:500; opacity:.9;
+}
+
+.meta{
+  display:inline-flex; align-items:center; gap:30px;
+  font-size:20px; font-weight:500;
+  margin:120px 0 20px 0;
+}
+.meta .dot{ width:6px; height:6px; background:#d9d9d9; border-radius:50%; }
+
+.desc{
+  max-width:586px;
+  font-size:20px; font-weight:500;
+  margin:0 0 64px 0;
+  color:#fff;
+  line-height: 1.4
+}
+
+/* Кнопка со свечением */
+.btn-glow{
+  position:relative; 
+  border:none;
+  border-radius:20px;
+  padding:12px 32px;
+  font-size:20px;
+  font-weight:500;
+  color:#fff; background:#FF0000; cursor:pointer; outline:none;
+  transition:transform .15s ease;
+
+  display: block;          /* превращаем кнопку в блочный элемент */
+  width: max-content;      /* чтобы не растягивалась на всю ширину */
+  margin-left: 70px;
+}
+.btn-glow::before{
+  content:""; position:absolute; inset:0; border-radius:20px;
+  background:#FF0000; filter:blur(35px); z-index:-1; transform:translateY(10px);
+}
+.btn-glow:hover{ transform:translateY(-1px); }
+.btn-glow:active{ transform:translateY(0); }
+
+
+
+/* масштабируем типографику всей секции */
+:root{
+  /* базовый шаг шрифта (настраивай под вкус) */
+  --fs-h1: clamp(44px, 6vw, 96px);
+  --fs-text: clamp(16px, 2vw, 20px);
+}
+
+/* применяем */
+.title{ font-size: var(--fs-h1); line-height: 1; }
+.rating, .meta, .desc{ font-size: var(--fs-text); }
+
+/* ширина арта тоже «живая» — просто подкрути центральный коэффициент */
+:root{
+  --art-w: clamp(360px, 50vw, 880px);
+}
+:root{ --art-w: calc(clamp(360px, 58vw, 1000px) + 300px); }
+.hero-art{
+  width: var(--art-w);
+  background-size: 100% 100%;
+  -webkit-mask-size: 100% 100%;
+          mask-size: 100% 100%;
+    z-index: -1;
+}
+
+.thumbs{
+    position: absolute;
+    top: 190px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 100;
+}
+
+.thumbs .thumb{
+    width: 200px;
+}
+.now{
+    margin-left: 100px;
+    margin-top: 40px;
+}
+
+.bt-dat{
+    background-color: #ffffff;
+    width: 120px;
+    height: 40px;
+    border-radius: 15px;
+    border: none;
+    margin-top: 10px;
+}
+.bt-dat.active{
+    background-color: #4D4D4D;
+    color: #fff;
+    
+}
+a{
+    text-decoration: none;
+    color: #ffffff;
+}
+.now2{
+  margin-top: 40px;
+  padding: 0 100px;     /* слева и справа по 100px */
+  max-width: calc(100%); /* учитываем отступы */
+  box-sizing: border-box;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+.post{
+  width: 100%;
+  display: block;
+  max-width: 300px;
+  
+}
+
+
+/* когда слишком узко — слегка сдвинь Бэтмена, чтобы важная часть была в кадре */
+@media (max-width: 1000px){
+  :root{ --bm-x: -10px; }
+}
+@media (max-width: 800px){
+  :root{ --bm-x: -20px; }
+}
+
+@media (max-width: 1350px) {
+    .thumbs{
+        display: none;
+    }
+    
+}
+@media (max-width: 700px) {
+    .post{
+    width: 100%;
+    display: block;
+    max-width: 300px;
+    border-radius: 12px;
+    }
+    .now2{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        align-items: start;
+        }
+    
+}
+
+@media (min-width: 1200px) {
+    .now2{
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 16px;
+        align-items: start;
+    }
+        header {
+        justify-content: space-between;
+    }
+    .cinema {
+        /* Re-center cinema title for mobile */
+        position: absolute; left:50%; top:50%; transform:translate(-50%, -50%);
+        margin-left: 0;
+        font-size: 38px;
+    }
+    .ms, .cn {
+        font-size: 38px; /* Adjust with cinema class on mobile */
+    }
+    .desktop-nav {
+        display: none; /* Hide desktop nav */
+    }
+    .burger {
+        display: flex; /* Show burger menu */
+        margin-right: 0;
+        margin-left: 16px; /* Space from left edge */
+    }
+    .main-nav {
+      display: none;
+    }
+    .hero-content .btn-glow {
+        margin: 30px auto; /* Center main hero button on smaller screens */
+    }
+    
+}
+
+/* ===== MODAL STYLES (Moved from details.css and adapted) ===== */
+.modal{
+  position: fixed; inset: 0;
+  display: none;
+  z-index: 999;
+}
+.modal.open{ display: block; }
+
+.modal-backdrop{
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,.6);
+}
+
+.modal-dialog{
+  position: relative;
+  max-width: 500px; /* Adjusted for login/register form size */
+  width: min(92vw, 500px);
+  margin: 5vh auto;
+  background: #111;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px;
+  box-shadow: 0 30px 80px rgba(0,0,0,.5);
+  padding: 20px 16px 16px;
+  color: #eaeaea;
+}
+
+.modal-close{
+  position: absolute; top: 10px; right: 10px;
+  width: 36px; height: 36px;
+  border: none; border-radius: 50%;
+  background: #222; color: #fff; cursor: pointer;
+  font-size: 20px; line-height: 1;
+}
+.modal-title{
+  margin: 0 0 10px 0;
+  font: 700 22px/1.2 system-ui, sans-serif;
+  text-align: center;
+}
+
+/* Styles for login/register form inside modal, adapted from regist.css/vxod.css */
+.login-form .text, .register-form .text{
+    margin: 0 0 20px 0;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: .3px;
+    color: #eaeaea;
+}
+
+.login-form .log, .login-form .pasword,
+.register-form .log, .register-form .pasword{
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-bottom: 16px;
+}
+
+.login-form p, .register-form p{
+  margin: 0;
+  font-size: 18px;
+  color: #b7b7b7;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"],
+.register-form input[type="text"],
+.register-form input[type="password"],
+.register-form input[type="email"]{
+    width: 100%;
+    padding: 12px 3px;
+    background:#121212;
+    color: #fff;
+    border: 1px solid #2a2a2a;
+    border-radius: 10px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.login-form .reg, .register-form .reg{
+    text-align: center;
+    padding: 0px;
+}
+.login-form .reg a, .register-form .reg a{
+    text-decoration: none;
+    color: red;
+    padding: 0px;
+}
+/* Ensure the .btn-glow inside modals also respects the full width of the form if needed */
+.modal-dialog .btn-glow {
+    width: 100%;
+    margin-left: 0 !important; /* Override default margin from .btn-glow */
+}
+
+/* ... existing styles ... */
+
+/* Scales typography and art size based on viewport width */
+:root{
+  --fs-h1: clamp(44px, 6vw, 96px);
+  --fs-text: clamp(16px, 2vw, 20px);
+  --art-w: calc(clamp(360px, 58vw, 1000px) + 300px); /* Adjusting art width more dynamically */
+  --bm-x: 30px;     /* default offset for batman image */
+  --bm-y: 50px;
+  --bm-scale: 0.9;
+}
+
+.title{ font-size: var(--fs-h1); line-height: 1; }
+.rating, .meta, .desc{ font-size: var(--fs-text); }
+.hero-art{
+  width: var(--art-w);
+  background-size: 100% 100%;
+  -webkit-mask-size: 100% 100%;
+          mask-size: 100% 100%;
+    z-index: -1;
+}
+
+.hero-photo{
+  transform: translate(var(--bm-x), var(--bm-y)) scale(var(--bm-scale));
+}
+
+
+/* ... existing global styles ... */
+
+header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background:#222121;
+  display:flex;
+  align-items:center;
+  justify-content: space-between; /* Adjusted for desktop nav to spread out */
+  padding:0 16px;
+  z-index:1000;
+}
+
+header *{ margin:0; padding:0; }
+
+.burger{
+  width:35px; height:20px;
+  display:none; /* Hidden by default on desktop, shown by media query */
+  flex-direction:column;
+  justify-content:space-between;
+  cursor:pointer;
+  z-index: 1001;
+}
+.burger span{ width:100%; height:4px; background:#fff; border-radius:2px; }
+
+.cinema{
+  /* Remove absolute positioning. It will flow in desktop, re-centered in mobile media query */
+  display:flex; gap:6px; white-space:nowrap; line-height:1;
+  margin-left: 20px; /* Space from left edge for desktop */
+}
+.ms{ color:#fff; font-size:48px; font-weight:700; }
+.cn{ color:#FF0000;  font-size:48px; font-weight:700; }
+
+/* NEW: Desktop Navigation Styles */
+.desktop-nav {
+    display: flex; /* Show by default on desktop */
+    align-items: center;
+    margin-left: auto; /* Push to the right */
+}
+
+.desktop-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 30px; /* Space between nav items */
+}
+
+.desktop-nav li { /* Important for controlling visibility of LK link */
+    display: flex; /* Ensure list item itself is a flex container for its content */
+    align-items: center;
+}
+
+.desktop-nav a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 10px 15px;
+    border-radius: 20px;
+    transition: background 0.2s ease, color 0.2s ease;
+    white-space: nowrap; /* Prevent link text from wrapping */
+}
+
+.desktop-nav a:hover {
+    background: #FF0000;
+    color: #fff;
+}
+
+/* Existing: Styles for the sliding navigation menu (Mobile only) */
+.main-nav {
+    position: fixed;
+    top: 0;
+    left: -100%; /* Start off-screen */
+    width: 280px;
+    height: 100vh;
+    background: #1a1a1a;
+    padding-top: 100px;
+    z-index: 999;
+    transition: left 0.3s ease-in-out;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.5);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    display: none; /* Hidden by default; JS will make it block when menu-open */
+}
+
+body.menu-open .main-nav {
+    left: 0;
+    display: block; /* Show when open */
+}
+
+.main-nav ul {
+    list-style: none;
+    padding: 0 20px;
+    margin: 0;
+}
+
+.main-nav li {
+    margin-bottom: 15px;
+    display: block; /* Important for controlling visibility of LK link in mobile */
+}
+
+.main-nav a {
+    display: block;
+    padding: 10px 15px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+    border-radius: 8px;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.main-nav a:hover {
+    background: #FF0000;
+    color: #fff;
+}
+
+/* Overlay (keep as previously updated) */
+.menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    display: none;
+    cursor: pointer;
+}
+
+body.menu-open .menu-overlay {
+    display: block;
+}
+
+/* NEW: Modal Centering (keep as previously updated) */
+.modal-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 500px;
+  width: min(92vw, 500px);
+  margin: 0;
+  background: #111;
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 30px;
+  box-shadow: 0 20px 60px rgba(204, 74, 74, 0.6);
+  padding: 28px;
+  color: #eaeaea;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* Media Queries for Mobile - Show Burger, Hide Desktop Nav */
+@media (max-width: 992px) { /* This breakpoint determines when desktop nav switches to burger */
+    .desktop-nav {
+        display: none; /* Hide desktop nav */
+    }
+    .burger {
+        display: flex; /* Show burger menu */
+        margin-right: 0; /* Reset margins */
+    }
+    .main-nav { /* Ensure main nav is prepared for mobile */
+      display: none; /* Start hidden for JS control */
+    }
+
+    header {
+        justify-content: space-between; /* Burger on left, Cinema in middle-ish */
+    }
+    .cinema {
+        position: absolute; left:50%; top:50%; transform:translate(-50%, -50%); /* Re-center cinema title for mobile */
+        margin-left: 0; /* Reset margins */
+        font-size: 38px; /* Adjust for mobile */
+    }
+    .ms, .cn {
+        font-size: 38px; /* Align with cinema class on mobile */
+    }
+    /* Hide the left-line on mobile as per previous responsive changes */
+    .left-line {
+        display: none;
+    }
+}
+
+/* Existing login/register form styles (keep as is) */
+.login-form .text, .register-form .text{
+    margin: 0 0 20px 0;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: .3px;
+    color: #eaeaea;
+}
+
+/* General responsive adjustments */
+@media (max-width: 1200px) {
+    /* ... existing 1200px styles ... */
+    header {
+        justify-content: space-between; /* Burger, Cinema, Button */
+    }
+    .cinema {
+        position: static; /* Let it flow normally */
+        transform: none;
+        flex-grow: 1; /* Allow it to take available space */
+        text-align: center; /* Center text within its space */
+        margin-left: 16px; /* Some spacing */
+        margin-right: 16px;
+    }
+    /* Ensure the burger and button have fixed positions relative to each other */
+    .burger {
+        order: -1; /* Place burger first */
+        margin-right: 0; /* Reset margin */
+        flex-shrink: 0;
+    }
+    .btn {
+        order: 1; /* Place button last */
+        margin-left: 0;
+        flex-shrink: 0;
+    }
+
+        .main-nav {
+        width: 250px;
+        padding-top: 80px;
+    }
+    .main-nav a {
+        font-size: 18px;
+        padding: 8px 12px;
+    }
+    .modal-dialog {
+        width: 95vw;
+        max-width: 95vw;
+        padding: 20px;
+        border-radius: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    /* ... existing 576px styles ... */
+    .main-nav {
+        width: 250px; /* Slightly smaller menu width on small phones */
+        padding-top: 80px;
+    }
+    .main-nav a {
+        font-size: 18px;
+        padding: 8px 12px;
+    }
+    .ms, .cn {
+        font-size: 38px; /* Adjust cinema title size */
+    }
+    .hero { /* Ensure content isn't hidden by left nav when open */
+        padding-left: 16px;
+    }
+    .left-line {
+        display: none;
+    }
+}
+
+/* New media queries for better responsiveness */
+@media (max-width: 1400px) {
+    .hero {
+        padding-left: 80px; /* Reduce padding for smaller wide screens */
+    }
+}
+
+@media (max-width: 1200px) {
+    .now2{
+        grid-template-columns: repeat(4, 1fr); /* Default to 4 columns below 1200px */
+    }
+    .thumbs { /* Keep thumbs hidden by default below this breakpoint if not desired */
+        display: none;
+    }
+    .hero {
+        padding-left: 100px; /* Adjust left line compensation */
+        padding-top: 100px; /* Adjust for potentially taller header or content on smaller screens */
+        min-height: auto; /* Allow hero section to shrink */
+    }
+    .left-line {
+        width: 60px; /* Reduce width of the left line */
+    }
+    .hero-art {
+        --art-w: calc(clamp(300px, 65vw, 900px) + 200px); /* Adjust art width */
+        --bm-x: 0px; /* Center batman more */
+    }
+
+        header {
+        justify-content: space-between;
+    }
+    .cinema {
+        position: static;
+        transform: none;
+        flex-grow: 1;
+        text-align: center;
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+    .burger {
+        order: -1;
+        margin-right: 0;
+        flex-shrink: 0;
+    }
+    .btn {
+        order: 1;
+        margin-left: 0;
+        flex-shrink: 0;
+    }
+}
+
+@media (max-width: 992px) {
+    .hero {
+        padding: 80px 16px 40px 80px; /* More balanced padding */
+        text-align: center; /* Center text content */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .hero-content {
+        max-width: 100%; /* Allow content to use full width */
+        padding-right: 0;
+    }
+    .hero-art {
+        position: static; /* Stack art below content */
+        width: 100%;
+        height: auto;
+        margin-top: 40px;
+        --art-w: 100%; /* Full width for art container */
+        background-position: center bottom; /* Center background image */
+        -webkit-mask-position: center bottom;
+                mask-position: center bottom;
+    }
+    .hero-photo {
+        position: static; /* Allow photo to be part of normal flow */
+        height: 400px; /* Fixed height for consistency */
+        object-fit: contain;
+        transform: none; /* Remove custom transform */
+        filter: drop-shadow(0 15px 30px rgba(0,0,0,.4));
+    }
+    .meta {
+        justify-content: center; /* Center meta info */
+    }
+    .btn-glow {
+        margin: 20px auto; /* Center button */
+    }
+    .now {
+        margin-left: 0;
+        text-align: center;
+        padding: 0 16px;
+    }
+    .now2 {
+        grid-template-columns: repeat(3, 1fr); /* 3 columns for medium screens */
+        padding: 0 16px;
+    }
+    .post {
+        max-width: 100%; /* Ensure images don't overflow */
+    }
+    header {
+        justify-content: space-between; /* Space out header items */
+    }
+    .cinema {
+        position: static; /* Allow cinema title to flow */
+        transform: none;
+    }
+    .burger {
+        margin-right: 16px; /* Adjust burger margin */
+    }
+    .btn {
+        margin-left: 16px;
+        margin-right: 0;
+    }
+        body { padding-top: 80px; }
+    .hero {
+        padding-top: 40px; /* Adjust hero top padding to give more space */
+        padding-left: 16px; /* Remove left-line padding */
+    }
+    .left-line {
+        display: none; /* Hide vertical line on small screens */
+    }
+    .section-title {
+        font-size: 30px;
+        margin: 40px 0 30px 0;
+    }
+    .modal-dialog {
+        padding: 25px; /* Slightly less padding for smaller screens */
+    }
+    .login-form input, .register-form input {
+        padding: 10px 12px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        padding-left: 16px; /* Remove left-line padding */
+    }
+    .left-line {
+        display: none; /* Hide vertical line on small screens */
+    }
+    .title {
+        font-size: clamp(36px, 10vw, 64px);
+        margin-bottom: 12px;
+    }
+    .rating, .meta, .desc {
+        font-size: clamp(14px, 4vw, 18px);
+    }
+    .hero-photo {
+        height: 300px;
+    }
+    .now2 {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for smaller screens */
+    }
+    .bt-dat {
+        width: 100px; /* Adjust button width */
+        height: 35px;
+        padding: 8px;
+        font-size: 14px;
+    }
+    .modal-dialog {
+        padding: 15px 10px 10px;
+    }
+    .modal-title {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    header {
+        height: 60px;
+        padding: 0 10px;
+    }
+    .ms, .cn {
+        font-size: 36px;
+    }
+    .burger {
+        width: 30px;
+        height: 18px;
+        margin-right: 10px;
+    }
+    .btn {
+        padding: 10px 20px;
+        font-size: 14px;
+        border-radius: 15px;
+    }
+    .hero-photo {
+        height: 250px;
+    }
+    .now2 {
+        grid-template-columns: 1fr; /* Single column for very small screens */
+    }
+    .post {
+        margin: 0 auto; /* Center single column images */
+    }
+    .now {
+        display: flex;
+        flex-wrap: wrap; /* Allow date buttons to wrap */
+        justify-content: center;
+        gap: 10px;
+    }
+    .bt-dat {
+        width: 45%; /* Make buttons take up half width */
+    }
+    .modal-dialog {
+        width: 95vw; /* Almost full width for modals */
+        margin: 2vh auto;
+    }
+    /* Login/Register form adjustments for small screens */
+    .login-form .text, .register-form .text {
+        font-size: 18px;
+    }
+    .login-form p, .register-form p {
+        font-size: 16px;
+    }
+    .login-form input, .register-form input {
+        padding: 10px 5px;
+        font-size: 16px;
+    }
+
+       .main-nav {
+        width: 250px;
+        padding-top: 80px;
+    }
+    .main-nav a {
+        font-size: 18px;
+        padding: 8px 12px;
+    }
+    .ms, .cn {
+        font-size: 38px;
+    }
+    .hero {
+        padding-left: 16px;
+    }
+    .left-line {
+        display: none;
+    }
+    /* Modal specific adjustment for very small screens */
+    .modal-dialog {
+        width: 95vw;
+        max-width: 95vw;
+        padding: 20px; /* Slightly reduce padding */
+        border-radius: 20px; /* Adjust border-radius */
+    }
+
+        header {
+        height: 60px;
+        padding: 0 10px;
+    }
+    .burger {
+        width: 30px;
+        height: 18px;
+        margin-left: 10px; /* Smaller margin */
+    }
+    .cinema {
+        /* Re-center for small phones */
+        font-size: 32px;
+    }
+    .ms, .cn {
+        font-size: 32px;
+    }
+    .main-nav {
+        width: 240px; /* Slightly narrower menu */
+        padding-top: 70px;
+    }
+    .main-nav a {
+        font-size: 16px;
+        padding: 8px 10px;
+    }
+    .modal-dialog {
+        width: 95vw;
+        max-width: 95vw;
+        padding: 15px; /* Further reduced padding */
+        border-radius: 15px;
+    }
+    .login-form .text, .register-form .text,
+    .login-form p, .register-form p {
+        font-size: 15px;
+    }
+    .login-form input, .register-form input {
+        padding: 8px 10px;
+        font-size: 14px;
+    }
+    .modal-dialog .btn-glow {
+        padding: 12px 20px;
+        font-size: 16px;
+    }
+}
+
+/* Adjustments for the specific modal inside details.html (seat selection) */
+@media (max-width: 768px) {
+  .modal .screen {
+    width: 80%; /* Make screen wider on smaller modals */
+  }
+  .hall, .row-labels {
+    grid-template-columns: repeat(10, minmax(25px, 1fr)); /* Reduce columns for seat selection */
+    gap: 8px 10px;
+    padding: 0 10px;
+  }
+  .seat {
+    font-size: 14px; /* Smaller seat text */
+    padding: 0;
+  }
+  .summary {
+    flex-direction: column; /* Stack summary elements */
+    align-items: center;
+    gap: 10px;
+  }
+  .total-line {
+    text-align: center;
+    font-size: 14px;
+  }
+  .btn-buy {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hall, .row-labels {
+    grid-template-columns: repeat(7, minmax(20px, 1fr)); /* Further reduce columns */
+    gap: 6px 8px;
+  }
+  .seat {
+    font-size: 12px;
+  }
+}

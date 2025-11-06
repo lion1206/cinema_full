@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Moscow Cinema — Бэтмен</title>
+
+  <!-- Шрифт -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- If this is lk.html, also include lk.css -->
+  <!-- <link rel="stylesheet" href="css/lk.css" /> -->
+</head>
+<body>
+
+  <header>
+    <div class="burger" id="burgerMenu">
+      <span></span><span></span><span></span>
+    </div>
+
+    <div class="cinema">
+      <a href="index.html" style="text-decoration: none; color: inherit;">
+          <p class="ms">moscow</p>
+          <p class="cn">cinema</p>
+      </a>
+    </div>
+
+    <!-- NEW: Desktop Navigation -->
+    <div class="desktop-nav" id="desktopNav">
+        <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li id="desktopLkNavLink"><a href="lk.html">Личный кабинет</a></li>
+            <li><a id="desktopAuthLink" href="#">ВХОД</a></li>
+        </ul>
+    </div>
+    <!-- END NEW Desktop Navigation -->
+
+  </header>
+
+  <!-- Navigation Menu for Burger (Mobile only) -->
+  <nav id="mainNav" class="main-nav">
+      <ul>
+          <li><a href="index.html">Главная</a></li>
+          <li id="mobileLkNavLink"><a href="lk.html">Личный кабинет</a></li>
+          <li><a id="mobileAuthLink" href="#">ВХОД</a></li>
+      </ul>
+  </nav>
+  <!-- END Navigation Menu -->
+
+  <!-- Existing content follows... -->
+  <div class="left-line"></div>
+
+  <main class="hero">
+    
+    <div class="hero-content">
+        <h1 class="title">Бэтмен</h1>
+
+        <p class="rating">Кинопоиск&nbsp;7,5/10</p>
+
+        <div class="meta">
+            <span>USA</span>
+            <span class="dot" aria-hidden="true"></span>
+            <span>2025</span>
+        </div>
+
+        <p class="desc">
+            Бэтмен поднимает ставки в войне с криминалом. С помощью лейтенанта Джима Гордона и прокурора Харви Дента он намерен очистить улицы Готэма от преступности. Сотрудничество оказывается эффективным, но скоро они обнаружат себя посреди хаоса, развязанного восходящим криминальным гением, известным напуганным горожанам под именем Джокер.
+        </p>
+            
+        <button class="btn-glow" type="button">Билеты</button>
+    </div>
+    <div class="hero-art">
+        <img class="hero-photo" src="photo/batman.png" alt="">
+    </div>
+    
+        
+    </div>
+    <div class="thumbs">
+        <img class="thumb" src="photo/fot1.png" alt="фото1">
+        <img class="thumb" src="photo/fot2.png" alt="фото2">
+    </div>
+  </main>
+  <div class="cpicok">
+    <div class="now" id="now"> 
+        <button type="button" class="bt-dat" data-filter="today">Сегодня</button>
+        <button type="button" class="bt-dat" data-filter="tomorrow">Завтра</button>
+        <button type="button" class="bt-dat" data-filter="2025-09-08">8 сентября</button>
+        <button type="button" class="bt-dat" data-filter="2025-09-09">9 сентября</button>
+        <button type="button" class="bt-dat" data-filter="2025-09-08">10 сентября</button>
+    </div>
+  </div>
+  <div class="now2" id="gallery"> 
+        
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal" aria-hidden="true">
+        <div class="modal-backdrop"></div>
+        <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+            <button class="modal-close" aria-label="Закрыть">×</button>
+            <h2 id="loginTitle" class="modal-title">Вход</h2>
+            <div class="login-form">
+                <div class="log">
+                    <p>Логин</p>
+                    <input type="text" name="username" id="loginUsername" class="l">
+                </div>
+                <div class="pasword">
+                    <p>Пароль</p>
+                    <input type="password" name="password" id="loginPassword">
+                </div>
+                <p id="loginError" style="color: red; text-align: center;"></p>
+                <button id="loginSubmitBtn" class="btn-glow" type="button" style="margin-left:0; margin-top:20px; width:100%;">Войти</button>
+                <div class="reg" style="margin-top:20px;">
+                    <p> У вас нет аккаунта?</p>
+                    <a href="#" id="openRegisterModal">Регистрация</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Registration Modal -->
+    <div id="registerModal" class="modal" aria-hidden="true">
+        <div class="modal-backdrop"></div>
+        <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="registerTitle">
+            <button class="modal-close" aria-label="Закрыть">×</button>
+            <h2 id="registerTitle" class="modal-title">Регистрация</h2>
+            <div class="register-form">
+                <p class="text"> Регистрация</p>
+                <div class="log">
+                    <p>Имя пользователя</p>
+                    <input type="text" name="username" id="registerUsername" class="l">
+                </div>
+                <div class="pasword">
+                    <p>Почта</p>
+                    <input type="email" name="email" id="registerEmail">
+                </div>
+                <div class="pasword">
+                    <p>Пароль</p>
+                    <input type="password" name="password" id="registerPassword">
+                </div>
+                <div class="pasword">
+                    <p>Подтвердите пароль</p>
+                    <input type="password" name="confirmPassword" id="registerConfirmPassword">
+                </div>
+                <p id="registerError" style="color: red; text-align: center;"></p>
+                <button id="registerSubmitBtn" class="btn-glow" type="button" style="margin-left:0; margin-top:20px; width:100%;">Зарегистрироваться</button>
+                <div class="reg" style="margin-top:20px;">
+                    <p> У вас уже есть аккаунт?</p>
+                    <a href="#" id="openLoginModal">Вход</a>
+                </div>
+            </div>
+        </div>
+    </div>
+  <script src="script.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/lk.css" />
+</head>
+<body>
+    <header>
+        <div class="burger" id="burgerMenu">
+            <span></span><span></span><span></span>
+        </div>
+        <div class="cinema">
+            <a href="index.html" style="text-decoration: none; color: inherit;">
+                <p class="ms">moscow</p>
+                <p class="cn">cinema</p>
+            </a>
+        </div>
+        <div class="desktop-nav" id="desktopNav">
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li id="desktopLkNavLink"><a href="lk.html">Личный кабинет</a></li>
+                <li><a id="desktopAuthLink" href="#">ВХОД</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <nav id="mainNav" class="main-nav">
+        <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li id="mobileLkNavLink"><a href="lk.html">Личный кабинет</a></li>
+            <li><a id="mobileAuthLink" href="#">ВХОД</a></li>
+        </ul>
+    </nav>
+    <div class="left-line"></div>
+
+    <main class="lk-main-content">
+        <h1>Мои Билеты</h1>
+        <div id="ticketsContainer" class="tickets-grid">
+            <p id="noTicketsMessage" style="text-align: center; color: #b7b7b7; font-size: 18px;"></p>
+        </div>
+        <button id="logoutBtn" class="btn-glow">Выйти из аккаунта</button>
+    </main>
+
+    <!-- Login/Register Modals (site-wide) -->
+    <div id="loginModal" class="modal" aria-hidden="true">
+        <div class="modal-backdrop"></div>
+        <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+            <button class="modal-close" aria-label="Закрыть">×</button>
+            <h2 id="loginTitle" class="modal-title">Вход</h2>
+            <div class="login-form">
+                <div class="log">
+                    <p>Логин</p>
+                    <input type="text" name="username" id="loginUsername" class="l">
+                </div>
+                <div class="pasword">
+                    <p>Пароль</p>
+                    <input type="password" name="password" id="loginPassword">
+                </div>
+                <p id="loginError" style="color: red; text-align: center;"></p>
+                <button id="loginSubmitBtn" class="btn-glow" type="button" style="margin-left:0; margin-top:20px; width:100%;">Войти</button>
+                <div class="reg" style="margin-top:20px;">
+                    <p> У вас нет аккаунта?</p>
+                    <a href="#" id="openRegisterModal">Регистрация</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="registerModal" class="modal" aria-hidden="true">
+        <div class="modal-backdrop"></div>
+        <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="registerTitle">
+            <button class="modal-close" aria-label="Закрыть">×</button>
+            <h2 id="registerTitle" class="modal-title">Регистрация</h2>
+            <div class="register-form">
+                <p class="text"> Регистрация</p>
+                <div class="log">
+                    <p>Имя пользователя</p>
+                    <input type="text" name="username" id="registerUsername" class="l">
+                </div>
+                <div class="pasword">
+                    <p>Почта</p>
+                    <input type="email" name="email" id="registerEmail">
+                </div>
+                <div class="pasword">
+                    <p>Пароль</p>
+                    <input type="password" name="password" id="registerPassword">
+                </div>
+                <div class="pasword">
+                    <p>Подтвердите пароль</p>
+                    <input type="password" name="confirmPassword" id="registerConfirmPassword">
+                </div>
+                <p id="registerError" style="color: red; text-align: center;"></p>
+                <button id="registerSubmitBtn" class="btn-glow" type="button" style="margin-left:0; margin-top:20px; width:100%;">Зарегистрироваться</button>
+                <div class="reg" style="margin-top:20px;">
+                    <p> У вас уже есть аккаунт?</p>
+                    <a href="#" id="openLoginModal">Вход</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js" defer></script>
+    <script src="lk.js" defer></script>
+</body>
+</html>

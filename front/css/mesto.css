@@ -1,0 +1,16 @@
+
+.bron{
+    color: #ff0707;
+    width: 80%;
+    height: 80%;
+}
+.line {
+  position: absolute;   /* чтобы управлять местоположением */
+  top: 100px;           /* 100 пикселей от верхнего края экрана */
+  left: 25%;              /* начинаем с левого края */
+  width: 50%;          /* на всю ширину */
+  height: 8px;          /* толщина линии */
+  background-color: gray; /* цвет */
+  border: none; 
+  border-radius: 2px;        /* убираем стандартную рамку */
+}

@@ -1,0 +1,67 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    min-height: 100vh;
+    background:#000;              /* чёрный фон под кино-стилистику */
+    font-family: 'Inter', system-ui, -apple-system, Arial, sans-serif;
+    color:#eaeaea;  
+
+}
+
+.text{
+    margin: 0 0 20px 0;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: .3px;
+
+}
+
+.vxod{
+    padding: 28px;
+    height: 550px;
+    width: 380px;
+    background: #1f1f1f;
+    border-radius: 30px;
+    border: 1px solid rgba(255,255,255,.06);
+    box-shadow: 0 20px 60px rgba(204, 74, 74, 0.6);
+}
+
+.log, .pasword{
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-bottom: 16px;
+}
+
+.log p, .pasword p{
+  margin: 0;
+  font-size: 18px;
+  color: #b7b7b7;
+}
+
+.vxod input[type="text"],
+.vxod input[type="password"],
+.vxod input[type="email"]{
+    width: 100%;
+    padding: 12px 3px;
+    background:#121212;
+    color: #fff;
+    border: 1px solid #2a2a2a;
+    border-radius: 10px;
+    outline: none;
+    
+}
+
+a{
+    text-decoration: none;
+    color: red;
+    padding: 0px;
+    
+}
+.reg{
+    text-align: center;
+    padding: 0px;
+}
